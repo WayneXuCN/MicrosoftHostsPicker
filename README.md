@@ -1,38 +1,148 @@
-# Microsoft Hosts Picker - M$💊
+<div align="center">
 
-A lightweight Python script to help you select the fastest IP addresses for Microsoft services.
+# Microsoft Hosts Picker
 
-## Why This Tool?
+<b>English</b> | <a href="README_CN.md">中文</a>
 
-In certain regions, Microsoft services may not function optimally due to DNS resolving to suboptimal IP addresses. This script aims to address that issue by finding the most responsive IPs for various Microsoft services.
+</div>
 
-## Getting Started
+A modern, asynchronous Python tool to automatically find and select the fastest IP addresses for Microsoft services.
 
-1. Install dependencies:
+## 🚀 Features
+
+- **Asynchronous ping testing** - Concurrent latency testing for faster results
+- **Smart IP selection** - Intelligent early termination when optimal IPs are found
+- **Modular configuration** - Easy-to-customize service definitions
+- **Beautiful console output** - Rich, colorful progress indicators and results
+- **Modern Python** - Built with asyncio, type hints, and dataclasses
+
+## 🎯 Why This Tool?
+
+In certain regions, Microsoft services may experience poor performance due to DNS resolving to suboptimal IP addresses. This tool solves that problem by:
+
+- Testing hundreds of IP addresses concurrently
+- Identifying the lowest-latency endpoints for each service
+- Generating optimized hosts file entries
+- Supporting 10+ Microsoft services including Xbox Live, Office CDN, Microsoft Store, and more
+
+## 📋 Supported Services
+
+- **Microsoft Account** - account.microsoft.com
+- **Xbox Live CDN** - Game content delivery and multiplayer services
+- **Xbox Cloud Sync** - Save game synchronization
+- **Office CDN** - Office application downloads and updates
+- **Microsoft Store** - App store images and pages
+- **Microsoft Games Download** - Game installation and updates
+- **Windows Update** - System updates and patches
+- **Microsoft Login** - Authentication services (static IP)
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- Python 3.12+
+- Network connectivity for ping testing
+
+### Method 1: Using uv (Recommended)
 
 ```sh
-pip install -r requirements.txt
+# Install uv if you haven't already
+pip install uv
+
+# Clone the repository
+git clone https://github.com/WayneXuCN/MicrosoftHostsPicker.git
+cd MicrosoftHostsPicker
+
+# Install dependencies
+uv sync
 ```
 
-2. Download the latest [ZIP](https://github.com/ButaiKirin/MicrosoftHostsPicker/archive/refs/heads/main.zip) from this repository.
+### Method 2: Using pip
 
-3. Extract the contents to your preferred location.
+```sh
+# Clone the repository
+git clone https://github.com/WayneXuCN/MicrosoftHostsPicker.git
+cd MicrosoftHostsPicker
 
-4. Run the script:
+# Install dependencies
+pip install ping3==4.0.4
+```
+
+## 🚀 Usage
+
+### Basic Usage
 
 ```sh
 python MicrosoftHostsPicker.py
 ```
 
-## How It Works
+### Advanced Configuration
 
-The script automatically selects the best IP addresses for various Microsoft services. Results are saved in a "hosts" file in the same directory as "MicrosoftHostsPicker.py".
+You can customize the behavior by modifying `config.py`:
 
-## Usage Tips
+```python
+DEFAULT_CONFIG = {
+    'ping_attempts': 2,           # Number of ping attempts per IP
+    'ping_timeout': 0.5,          # Ping timeout in seconds
+    'ping_max_workers': 100,      # Concurrent ping limit
+    'good_enough_threshold': 50.0, # Stop testing if latency < 50ms
+}
+```
 
-- Only replace the problematic IP addresses in your system's hosts file.
-- Avoid overwriting all entries, as this may cause unintended issues.
-- Some services (e.g., Office Download and Windows Update) use global CDN nodes and may not require manual configuration unless your DNS is resolving incorrectly.
+## 📁 Project Structure
 
+```text
+MicrosoftHostsPicker/
+├── MicrosoftHostsPicker.py    # Main application
+├── config.py                  # Service configurations
+├── pyproject.toml            # Project metadata and dependencies
+├── uv.lock                   # Lock file for reproducible builds
+├── data/                     # IP address databases
+│   ├── Microsoft_Account.txt
+│   ├── Xbox_Live_CDN_1.txt
+│   └── ...
+└── hosts                     # Generated hosts file (after running)
+```
 
-Enjoy faster and more reliable access to Microsoft services!
+## 🔧 How It Works
+
+1. **Configuration Loading** - Reads service definitions from `config.py`
+2. **Asynchronous Testing** - Concurrently pings IP addresses from data files
+3. **Smart Optimization** - Uses early termination for large IP sets
+4. **Result Generation** - Creates optimized hosts file entries
+5. **User Guidance** - Provides clear instructions for implementation
+
+## 📖 Usage Tips
+
+- **Selective Application**: Only replace problematic IP addresses in your system's hosts file
+- **Backup First**: Always backup your existing hosts file before making changes
+- **Service-Specific**: Some services use global CDN and may not need manual configuration
+- **Regular Updates**: Re-run the tool periodically as optimal IPs may change
+
+## 🔍 Understanding the Output
+
+The tool provides rich console output:
+
+- ✅ **Green checkmark**: Optimal IP found
+- ❌ **Red X**: No available IP found  
+- ⚠️ **Warning**: Test failed
+- 📊 **Progress bar**: Shows testing progress for large IP sets
+
+## 🛡️ System Hosts File Locations
+
+- **Windows**: `C:\Windows\System32\drivers\etc\hosts`
+- **macOS/Linux**: `/etc/hosts`
+
+Remember to run as administrator/sudo when modifying system hosts files.
+
+## 🙏 Acknowledgments
+
+This project is based on [ButaiKirin/MicrosoftHostsPicker](https://github.com/ButaiKirin/MicrosoftHostsPicker). Thanks to the original author for the foundation work.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
+
+## 📄 License
+
+This project is licensed under the terms specified in the LICENSE file.

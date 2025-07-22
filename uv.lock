@@ -1,0 +1,23 @@
+version = 1
+revision = 2
+requires-python = "==3.12.*"
+
+[[package]]
+name = "microsofthostspicker"
+version = "0.0.1"
+source = { editable = "." }
+dependencies = [
+    { name = "ping3" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ping3", specifier = "==4.0.4" }]
+
+[[package]]
+name = "ping3"
+version = "4.0.4"
+source = { registry = "https://pypi.tuna.tsinghua.edu.cn/simple" }
+sdist = { url = "https://pypi.tuna.tsinghua.edu.cn/packages/a8/cf/8c687628a6aaf473f5770aaf06ebdace347443df0cf9a6622ccbb75ea83c/ping3-4.0.4.tar.gz", hash = "sha256:1ea12acf6752d4666616341fd7c6393c664cffc510c693ef06f736fb267a13ba", size = 15102, upload-time = "2022-12-15T11:56:13.634Z" }
+wheels = [
+    { url = "https://pypi.tuna.tsinghua.edu.cn/packages/55/ca/720df8b141226931719a4bd5e178b4abd01cc6eaab8ccfd3f66202421e25/ping3-4.0.4-py3-none-any.whl", hash = "sha256:dd8439ced69d6fec5885c8d4faefb055aacffb5a20f5e38a78459a5b18cc5e5a", size = 13906, upload-time = "2022-12-15T11:56:10.371Z" },
+]
